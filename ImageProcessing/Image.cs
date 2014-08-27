@@ -25,7 +25,7 @@ namespace ImageProcessing
         /// <param name="imagePath"></param>
         public Image(string imagePath)
         {
-            // TODO: Complete member initialization
+            // TODO: Complete member initialization and constructs the bitmap image as well as the image matrix
             this._imagePath = imagePath;
             
             
@@ -35,11 +35,23 @@ namespace ImageProcessing
         {
             // TODO: Complete member initialization
         }
-
-        public void zoomIn(double percent)
+    
+        /// <summary>
+        /// Zooms in the current image
+        /// </summary>
+        /// <param name="percent"></param>
+        public void zoom(double percent)
         {
 
         }
-        
+
+        /// <summary>
+        /// Compose the current image from the list of images given
+        /// </summary>
+        /// <param name="_images"></param>
+        public void compose(List<Image> _images)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

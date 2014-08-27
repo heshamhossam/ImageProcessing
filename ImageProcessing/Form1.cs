@@ -24,6 +24,19 @@ namespace ImageProcessing
 
             //set the open file dialog tittle
             openFileDialogLoadImage.Title = "Load Image";
+            //set the on images change handler
+            ImagesChanged += ImagesChangedHandler;
+        }
+
+        /// <summary>
+        /// Handles the change in list of images
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImagesChangedHandler(object sender, EventArgs e)
+        {
+            _compositeImage.compose(_images);
+            viewImage(_compositeImage);
         }
 
         /// <summary>
@@ -65,7 +78,7 @@ namespace ImageProcessing
         {
             foreach (var image in _images)
             {
-                image.zoomIn(1.1);
+                image.zoom(1.1);
             }
 
             OnImagesChange(EventArgs.Empty);
@@ -75,7 +88,7 @@ namespace ImageProcessing
         {
             foreach (var image in _images)
             {
-                image.zoomIn(0.9);
+                image.zoom(0.9);
             }
 
             OnImagesChange(EventArgs.Empty);
