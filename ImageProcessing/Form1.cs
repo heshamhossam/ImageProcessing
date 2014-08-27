@@ -18,6 +18,8 @@ namespace ImageProcessing
         private Image _compositeImage = new Image();
         //handler called whenever the image layers are changed
         private event EventHandler ImagesChanged;
+        //corner points of cropping
+        private Point _firstCorner, _secondCorner;   
         
 
 
@@ -92,7 +94,7 @@ namespace ImageProcessing
             foreach (Image layer in listBoxLayers.SelectedItems)
             {
                 //zoom with 110%
-                layer.zoom(1.1);
+                layer.zoom(1.1, Interpolation.NEAREST_NEIGHBOR);
             }
             //call the on image layers change event handler
             OnImagesChange(EventArgs.Empty);
@@ -104,7 +106,7 @@ namespace ImageProcessing
             foreach (Image layer in listBoxLayers.SelectedItems)
             {
                 //zoom with 90%
-                layer.zoom(0.9);
+                layer.zoom(0.9, Interpolation.NEAREST_NEIGHBOR);
             }
             //call the on image layers change event handler
             OnImagesChange(EventArgs.Empty);
@@ -165,6 +167,37 @@ namespace ImageProcessing
 		
 		        
 	        }
+            
+        }
+
+        private void pictureBoxImage_MouseDown(object sender, MouseEventArgs e)
+        {
+            _firstCorner = new Point(e.X, e.Y);
+        }
+
+        private void pictureBoxImage_MouseUp(object sender, MouseEventArgs e)
+        {
+            _secondCorner = new Point(e.X, e.Y);
+        }
+
+        private void buttonCrop_Click(object sender, EventArgs e)
+        {
+            //loop on each selected layer
+            foreach (Image layer in listBoxLayers.SelectedItems)
+            {
+                //crop image layer
+                layer.crop(_firstCorner, _secondCorner);
+            }
+            //call the on image layers change event handler
+            OnImagesChange(EventArgs.Empty);
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogSaveImage.ShowDialog() == DialogResult.OK)
+            {
+                _compositeImage.save(saveFileDialogSaveImage.FileName);
+            }
             
         }
     }

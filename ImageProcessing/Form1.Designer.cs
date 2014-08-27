@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBoxImageOperations = new System.Windows.Forms.GroupBox();
-            this.buttonUndo = new System.Windows.Forms.Button();
             this.buttonZoomOut = new System.Windows.Forms.Button();
             this.buttonZoomIn = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
@@ -42,6 +41,8 @@
             this.buttonLayerUp = new System.Windows.Forms.Button();
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.openFileDialogLoadImage = new System.Windows.Forms.OpenFileDialog();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.saveFileDialogSaveImage = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxImageOperations.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxLayerOpertations.SuspendLayout();
@@ -50,7 +51,7 @@
             // 
             // groupBoxImageOperations
             // 
-            this.groupBoxImageOperations.Controls.Add(this.buttonUndo);
+            this.groupBoxImageOperations.Controls.Add(this.buttonSave);
             this.groupBoxImageOperations.Controls.Add(this.buttonZoomOut);
             this.groupBoxImageOperations.Controls.Add(this.buttonZoomIn);
             this.groupBoxImageOperations.Controls.Add(this.buttonLoad);
@@ -61,15 +62,6 @@
             this.groupBoxImageOperations.TabIndex = 0;
             this.groupBoxImageOperations.TabStop = false;
             this.groupBoxImageOperations.Text = "Operations";
-            // 
-            // buttonUndo
-            // 
-            this.buttonUndo.Location = new System.Drawing.Point(6, 135);
-            this.buttonUndo.Name = "buttonUndo";
-            this.buttonUndo.Size = new System.Drawing.Size(62, 23);
-            this.buttonUndo.TabIndex = 0;
-            this.buttonUndo.Text = "Undo";
-            this.buttonUndo.UseVisualStyleBackColor = true;
             // 
             // buttonZoomOut
             // 
@@ -109,6 +101,7 @@
             this.buttonCrop.TabIndex = 0;
             this.buttonCrop.Text = "Crop";
             this.buttonCrop.UseVisualStyleBackColor = true;
+            this.buttonCrop.Click += new System.EventHandler(this.buttonCrop_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -188,10 +181,22 @@
             this.pictureBoxImage.Size = new System.Drawing.Size(362, 411);
             this.pictureBoxImage.TabIndex = 1;
             this.pictureBoxImage.TabStop = false;
+            this.pictureBoxImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxImage_MouseDown);
+            this.pictureBoxImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxImage_MouseUp);
             // 
             // openFileDialogLoadImage
             // 
             this.openFileDialogLoadImage.FileName = "openFileDialog";
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(6, 135);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(62, 23);
+            this.buttonSave.TabIndex = 0;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // Form1
             // 
@@ -217,7 +222,6 @@
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonCrop;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button buttonUndo;
         private System.Windows.Forms.PictureBox pictureBoxImage;
         private System.Windows.Forms.GroupBox groupBoxLayerOpertations;
         private System.Windows.Forms.Button buttonLayerDelete;
@@ -225,6 +229,8 @@
         private System.Windows.Forms.Button buttonLayerUp;
         private System.Windows.Forms.OpenFileDialog openFileDialogLoadImage;
         private System.Windows.Forms.ListBox listBoxLayers;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogSaveImage;
     }
 }
 

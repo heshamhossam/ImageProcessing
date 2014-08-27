@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace ImageProcessing
 {
+    public enum Interpolation
+    {
+        NEAREST_NEIGHBOR,
+        BILINEAR
+    };
+
     public class Image
     {
         private string _imagePath;
@@ -14,10 +20,22 @@ namespace ImageProcessing
         {
             get { return _imagePath; }
         }
-        private Bitmap _bitmapImage;
         public Bitmap Bitmap 
         {
-            get { return _bitmapImage; }
+            get 
+            {
+                Bitmap bitmap = new Bitmap(_matrix.GetLength(0), _matrix.GetLength(1));
+
+                for (int i = 0; i < _matrix.GetLength(0); i++)
+                {
+                    for (int j = 0; j < _matrix.GetLength(1); j++)
+                    {
+                        bitmap.SetPixel(i, j, _matrix[i, j]);
+                    }
+                }
+
+                return bitmap;
+            }
         }
 
         protected Color[,] _matrix;
@@ -34,8 +52,8 @@ namespace ImageProcessing
         {
             // TODO: Complete member initialization and constructs the bitmap image as well as the image matrix
             this._imagePath = imagePath;
-            this._bitmapImage = new Bitmap(imagePath);
-            this._matrix = getImageMatrix(this._bitmapImage);
+            Bitmap bitmapImage = new Bitmap(imagePath);
+            this._matrix = getImageMatrix(bitmapImage);
 
         }
 
@@ -48,27 +66,104 @@ namespace ImageProcessing
         /// Zooms in the current image
         /// </summary>
         /// <param name="scalingFactor"></param>
-        public void zoom(double scalingFactor)
+        public void zoom(double scalingFactor, Interpolation interpolationTechnique)
         {
             int scaledWidth = (int)Math.Floor(_matrix.GetLength(0) * scalingFactor);
             int scaledHeight = (int)Math.Floor(_matrix.GetLength(1) * scalingFactor);
 
             Color[,] scaledImageMatrix = new Color[scaledWidth, scaledHeight];
 
-            double sourceCoordX, sourceCoordY;
-            int sourceCoordXFloored, sourceCoordYFloored;
-
+            double sourceCoordX, sourceCoordY, adjustedCoordX, adjustedCoordY, distanceX, distanceY, prevPixelRatioX, nextPixelRatioX, prevPixelRatioY, nextPixelRatioY;
+            int sourceCoordXFloored, sourceCoordYFloored, red, green, blue;
+            Color topMergedColor, bottomMergedColor, mergedColor, prevColor, nextColor;
             for (int x = 0; x < scaledWidth; x++)
             {
                 for (int y = 0; y < scaledHeight; y++)
                 {
                     sourceCoordX = ((double)x / scaledWidth) * _matrix.GetLength(0);
-                    sourceCoordXFloored = (int)Math.Floor(sourceCoordX);
-
                     sourceCoordY = ((double)y / scaledHeight) * _matrix.GetLength(1);
+                    sourceCoordXFloored = (int)Math.Floor(sourceCoordX);
                     sourceCoordYFloored = (int)Math.Floor(sourceCoordY);
 
-                    scaledImageMatrix[x, y] = _matrix[sourceCoordXFloored, sourceCoordYFloored];
+                    switch (interpolationTechnique)
+                    {
+                        case Interpolation.NEAREST_NEIGHBOR:
+                            scaledImageMatrix[x, y] = _matrix[sourceCoordXFloored, sourceCoordYFloored];
+                            break;
+
+                        case Interpolation.BILINEAR:
+                            #region Bilinear interpolation 
+                            adjustedCoordX = sourceCoordX - 0.5;
+                            distanceX = adjustedCoordX - Math.Floor(adjustedCoordX);
+                            prevPixelRatioX = 1 - distanceX;
+                            nextPixelRatioX = distanceX;
+
+                            prevColor = _matrix[sourceCoordXFloored, sourceCoordYFloored];
+
+                            try
+                            {
+                                nextColor = _matrix[sourceCoordXFloored, sourceCoordYFloored + 1];
+                            }
+                            catch (Exception)
+                            {
+                                nextColor = _matrix[sourceCoordXFloored, sourceCoordYFloored];
+                            }
+                                
+
+                            red = (int)Math.Floor(prevColor.R * prevPixelRatioX + nextColor.R * nextPixelRatioX);
+                            green = (int)Math.Floor(prevColor.G * prevPixelRatioX + nextColor.G * nextPixelRatioX);
+                            blue = (int)Math.Floor(prevColor.B * prevPixelRatioX + nextColor.B * nextPixelRatioX);
+                            topMergedColor = Color.FromArgb(red, green, blue);
+
+
+                            try
+                            {
+                                prevColor = _matrix[sourceCoordXFloored + 1, sourceCoordYFloored];
+                            }
+                            catch (Exception)
+                            {
+                                prevColor = _matrix[sourceCoordXFloored, sourceCoordYFloored];
+                            }
+                            
+
+                            try
+                            {
+                                nextColor = _matrix[sourceCoordXFloored + 1, sourceCoordYFloored + 1];
+                            }
+                            catch (Exception)
+                            {
+                                nextColor = _matrix[sourceCoordXFloored, sourceCoordYFloored];
+                            }
+
+                            red = (int)Math.Floor(prevColor.R * prevPixelRatioX + nextColor.R * nextPixelRatioX);
+                            green = (int)Math.Floor(prevColor.G * prevPixelRatioX + nextColor.G * nextPixelRatioX);
+                            blue = (int)Math.Floor(prevColor.B * prevPixelRatioX + nextColor.B * nextPixelRatioX);
+                            bottomMergedColor = Color.FromArgb(red, green, blue);
+
+                            
+                            
+
+                            adjustedCoordY = sourceCoordY - 0.5;
+                            distanceY = adjustedCoordY - Math.Floor(adjustedCoordY);
+                            prevPixelRatioY = 1 - distanceY;
+                            nextPixelRatioY = distanceY;
+
+                            red = (int)Math.Floor(topMergedColor.R * prevPixelRatioY + bottomMergedColor.R * nextPixelRatioY);
+                            green = (int)Math.Floor(topMergedColor.G * prevPixelRatioY + bottomMergedColor.G * nextPixelRatioY);
+                            blue = (int)Math.Floor(topMergedColor.B * prevPixelRatioY + bottomMergedColor.B * nextPixelRatioY);
+                            mergedColor = Color.FromArgb(red, green, blue);
+
+
+                            scaledImageMatrix[x, y] = mergedColor;
+
+                            #endregion
+                            break;
+
+                            
+                    }
+                    
+
+                    
 
                 }
             }
@@ -97,8 +192,6 @@ namespace ImageProcessing
                     height = image.Matrix.GetLength(1);
 	        }
 
-            //build the new image composed of the given images
-            _bitmapImage = new Bitmap(width, height);
             _matrix = new Color[width, height];
 
             foreach (Image image in images)
@@ -107,7 +200,6 @@ namespace ImageProcessing
                 {
                     for (int j = 0; j < image.Matrix.GetLength(1); j++)
                     {
-                        _bitmapImage.SetPixel(i, j, image.Matrix[i, j]);
                         _matrix[i, j] = image.Matrix[i, j];
                     }
                 }
@@ -136,6 +228,16 @@ namespace ImageProcessing
         public override string ToString()
         {
             return Path;
-        } 
+        }
+
+        internal void crop(Point _firstCorner, Point _secondCorner)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void save(string p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
