@@ -38,14 +38,14 @@
             this.groupBoxLayerOpertations = new System.Windows.Forms.GroupBox();
             this.buttonLayerDelete = new System.Windows.Forms.Button();
             this.buttonLayerDown = new System.Windows.Forms.Button();
-            this.listBoxLayers = new System.Windows.Forms.ListBox();
             this.buttonLayerUp = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.openFileDialogLoadImage = new System.Windows.Forms.OpenFileDialog();
+            this.listBoxLayers = new System.Windows.Forms.ListBox();
             this.groupBoxImageOperations.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxLayerOpertations.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxImageOperations
@@ -55,7 +55,7 @@
             this.groupBoxImageOperations.Controls.Add(this.buttonZoomIn);
             this.groupBoxImageOperations.Controls.Add(this.buttonLoad);
             this.groupBoxImageOperations.Controls.Add(this.buttonCrop);
-            this.groupBoxImageOperations.Location = new System.Drawing.Point(568, 3);
+            this.groupBoxImageOperations.Location = new System.Drawing.Point(567, 3);
             this.groupBoxImageOperations.Name = "groupBoxImageOperations";
             this.groupBoxImageOperations.Size = new System.Drawing.Size(79, 411);
             this.groupBoxImageOperations.TabIndex = 0;
@@ -115,10 +115,10 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.69027F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.30974F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this.tableLayoutPanel1.Controls.Add(this.groupBoxLayerOpertations, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxImageOperations, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxImage, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -157,15 +157,6 @@
             this.buttonLayerDown.Text = "Down";
             this.buttonLayerDown.UseVisualStyleBackColor = true;
             // 
-            // listBoxLayers
-            // 
-            this.listBoxLayers.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.listBoxLayers.FormattingEnabled = true;
-            this.listBoxLayers.Location = new System.Drawing.Point(7, 41);
-            this.listBoxLayers.Name = "listBoxLayers";
-            this.listBoxLayers.Size = new System.Drawing.Size(171, 368);
-            this.listBoxLayers.TabIndex = 2;
-            // 
             // buttonLayerUp
             // 
             this.buttonLayerUp.Location = new System.Drawing.Point(7, 12);
@@ -175,17 +166,29 @@
             this.buttonLayerUp.Text = "Up";
             this.buttonLayerUp.UseVisualStyleBackColor = true;
             // 
-            // pictureBox
+            // pictureBoxImage
             // 
-            this.pictureBox.Location = new System.Drawing.Point(199, 3);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(363, 411);
-            this.pictureBox.TabIndex = 1;
-            this.pictureBox.TabStop = false;
+            this.pictureBoxImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxImage.Location = new System.Drawing.Point(199, 3);
+            this.pictureBoxImage.Name = "pictureBoxImage";
+            this.pictureBoxImage.Size = new System.Drawing.Size(362, 411);
+            this.pictureBoxImage.TabIndex = 1;
+            this.pictureBoxImage.TabStop = false;
             // 
             // openFileDialogLoadImage
             // 
             this.openFileDialogLoadImage.FileName = "openFileDialog";
+            // 
+            // listBoxLayers
+            // 
+            this.listBoxLayers.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.listBoxLayers.FormattingEnabled = true;
+            this.listBoxLayers.Location = new System.Drawing.Point(7, 41);
+            this.listBoxLayers.Name = "listBoxLayers";
+            this.listBoxLayers.Size = new System.Drawing.Size(171, 368);
+            this.listBoxLayers.TabIndex = 2;
             // 
             // Form1
             // 
@@ -198,7 +201,7 @@
             this.groupBoxImageOperations.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBoxLayerOpertations.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -212,13 +215,13 @@
         private System.Windows.Forms.Button buttonCrop;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button buttonUndo;
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.ListBox listBoxLayers;
+        private System.Windows.Forms.PictureBox pictureBoxImage;
         private System.Windows.Forms.GroupBox groupBoxLayerOpertations;
         private System.Windows.Forms.Button buttonLayerDelete;
         private System.Windows.Forms.Button buttonLayerDown;
         private System.Windows.Forms.Button buttonLayerUp;
         private System.Windows.Forms.OpenFileDialog openFileDialogLoadImage;
+        private System.Windows.Forms.ListBox listBoxLayers;
     }
 }
 

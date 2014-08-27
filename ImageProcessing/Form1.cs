@@ -16,6 +16,9 @@ namespace ImageProcessing
         private List<Image> _images = new List<Image>();
         private Image _compositeImage = new Image();
         private event EventHandler ImagesChanged;
+        //list item image dictionary
+        private Dictionary<String, Image> _listBoxItemImageDictionary = new Dictionary<String, Image>();
+        
 
 
         public Form1()
@@ -26,6 +29,9 @@ namespace ImageProcessing
             openFileDialogLoadImage.Title = "Load Image";
             //set the on images change handler
             ImagesChanged += ImagesChangedHandler;
+            //set the selection mode of listbox layers to multiple
+            listBoxLayers.SelectionMode = SelectionMode.MultiExtended;
+                
         }
 
         /// <summary>
@@ -35,8 +41,11 @@ namespace ImageProcessing
         /// <param name="e"></param>
         private void ImagesChangedHandler(object sender, EventArgs e)
         {
+            //compose a new image
             _compositeImage.compose(_images);
+            //view the composed image
             viewImage(_compositeImage);
+            
         }
 
         /// <summary>
@@ -61,6 +70,11 @@ namespace ImageProcessing
             if (openFileDialogLoadImage.ShowDialog() == DialogResult.OK)
             {
                 _images.Add(new Image(openFileDialogLoadImage.FileName));
+                //connect the list item with the image
+                _listBoxItemImageDictionary.Add(_images[_images.Count - 1].ToString(), _images[_images.Count - 1]);
+                //add the new image to the layers
+                listBoxLayers.Items.Add(_images[_images.Count - 1].ToString());
+
                 OnImagesChange(EventArgs.Empty);
             }
         }
@@ -71,14 +85,14 @@ namespace ImageProcessing
         /// <param name="_compositeImage">image to view in the picture box</param>
         private void viewImage(Image _compositeImage)
         {
-            throw new NotImplementedException();
+            pictureBoxImage.Image = _compositeImage.Bitmap;
         }
 
         private void buttonZoomIn_Click(object sender, EventArgs e)
         {
-            foreach (var image in _images)
+            foreach (var layer in listBoxLayers.SelectedItems)
             {
-                image.zoom(1.1);
+                _listBoxItemImageDictionary[layer.ToString()].zoom(1.1);
             }
 
             OnImagesChange(EventArgs.Empty);
@@ -86,9 +100,9 @@ namespace ImageProcessing
 
         private void buttonZoomOut_Click(object sender, EventArgs e)
         {
-            foreach (var image in _images)
+            foreach (var layer in listBoxLayers.SelectedItems)
             {
-                image.zoom(0.9);
+                _listBoxItemImageDictionary[layer.ToString()].zoom(0.9);
             }
 
             OnImagesChange(EventArgs.Empty);

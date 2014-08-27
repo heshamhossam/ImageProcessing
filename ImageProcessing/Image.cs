@@ -10,12 +10,20 @@ namespace ImageProcessing
     public class Image
     {
         private string _imagePath;
-        private Bitmap _bitmapImage;
-
-        protected Color[,] _imageMatrix;
-        public Color[,] ImageMatrix
+        public string Path
         {
-            get { return _imageMatrix; }
+            get { return _imagePath; }
+        }
+        private Bitmap _bitmapImage;
+        public Bitmap Bitmap 
+        {
+            get { return _bitmapImage; }
+        }
+
+        protected Color[,] _matrix;
+        public Color[,] Matrix
+        {
+            get { return _matrix; }
         }
 
         /// <summary>
@@ -27,7 +35,7 @@ namespace ImageProcessing
             // TODO: Complete member initialization and constructs the bitmap image as well as the image matrix
             this._imagePath = imagePath;
             this._bitmapImage = new Bitmap(imagePath);
-           this._imageMatrix =  GetImageMatrix(this._bitmapImage);/////////////////Construct The Image Matrix
+            this._matrix = getImageMatrix(this._bitmapImage);
 
         }
 
@@ -35,35 +43,80 @@ namespace ImageProcessing
         {
             // TODO: Complete member initialization
         }
-    
+
         /// <summary>
         /// Zooms in the current image
         /// </summary>
-        /// <param name="percent"></param>
-        public void zoom(double percent)
+        /// <param name="scalingFactor"></param>
+        public void zoom(double scalingFactor)
         {
+            int scaledWidth = (int)Math.Floor(_matrix.GetLength(0) * scalingFactor);
+            int scaledHeight = (int)Math.Floor(_matrix.GetLength(1) * scalingFactor);
 
+            Color[,] scaledImageMatrix = new Color[scaledWidth, scaledHeight];
+
+            double sourceCoordX, sourceCoordY;
+            int sourceCoordXFloored, sourceCoordYFloored;
+
+            for (int x = 0; x < scaledWidth; x++)
+            {
+                for (int y = 0; y < scaledHeight; y++)
+                {
+                    sourceCoordX = ((double)x / scaledWidth) * _matrix.GetLength(0);
+                    sourceCoordXFloored = (int)Math.Floor(sourceCoordX);
+
+                    sourceCoordY = ((double)y / scaledHeight) * _matrix.GetLength(1);
+                    sourceCoordYFloored = (int)Math.Floor(sourceCoordY);
+
+                    scaledImageMatrix[x, y] = _matrix[sourceCoordXFloored, sourceCoordYFloored];
+
+                }
+            }
+
+
+            _matrix = scaledImageMatrix;
         }
 
         /// <summary>
         /// Compose the current image from the list of images given
         /// </summary>
-        /// <param name="_images"></param>
-        public void compose(List<Bitmap> _images)
+        /// <param name="images"></param>
+        public void compose(List<Image> images)
         {
-            foreach(Bitmap bit in _images)
+            
+            //find biggest image with height
+            int width = images[0].Matrix.GetLength(0);
+            int height = images[0].Matrix.GetLength(1);
+
+            foreach (var image in images)
+	        {
+		        if (image.Matrix.GetLength(0) > width)
+                    width = image.Matrix.GetLength(0);
+
+                if (image.Matrix.GetLength(1) > height)
+                    height = image.Matrix.GetLength(1);
+	        }
+
+            //build the new image composed of the given images
+            _bitmapImage = new Bitmap(width, height);
+            _matrix = new Color[width, height];
+
+            foreach (Image image in images)
             {
-                Color[,] imagematrixtemp = GetImageMatrix(bit);
-                for (int i = 0; i < imagematrixtemp.GetLength(0); i++)
+                for (int i = 0; i < image.Matrix.GetLength(0); i++)
                 {
-                    for (int j = 0; j < imagematrixtemp.GetLength(1); j++)
+                    for (int j = 0; j < image.Matrix.GetLength(1); j++)
                     {
-                        this._bitmapImage.SetPixel(this._bitmapImage.Width+i, this._bitmapImage.Height + j, imagematrixtemp[imagematrixtemp.GetLength(0) - i - 1, imagematrixtemp.GetLength(1) - j - 1]);
+                        _bitmapImage.SetPixel(i, j, image.Matrix[i, j]);
+                        _matrix[i, j] = image.Matrix[i, j];
                     }
                 }
             }
+
+
         }
-        private Color[,] GetImageMatrix(Bitmap bitmap)
+
+        private Color[,] getImageMatrix(Bitmap bitmap)
         {
 
             Color[,] imagematrix = new Color[bitmap.Width, bitmap.Height];
@@ -78,5 +131,11 @@ namespace ImageProcessing
 
             return imagematrix;
         }
+
+
+        public override string ToString()
+        {
+            return Path;
+        } 
     }
 }
