@@ -12,12 +12,12 @@ namespace ImageProcessing
 {
     public partial class Form1 : Form
     {
-        //list of images in this application
-        private List<Image> _images = new List<Image>();
+        //list of images(layers) in this application
+        private BindingList<Image> _images = new BindingList<Image>();
+        //the composite image made of all layers
         private Image _compositeImage = new Image();
+        //handler called whenever the image layers are changed
         private event EventHandler ImagesChanged;
-        //list item image dictionary
-        private Dictionary<String, Image> _listBoxItemImageDictionary = new Dictionary<String, Image>();
         
 
 
@@ -31,6 +31,8 @@ namespace ImageProcessing
             ImagesChanged += ImagesChangedHandler;
             //set the selection mode of listbox layers to multiple
             listBoxLayers.SelectionMode = SelectionMode.MultiExtended;
+            //bind the images to the list box
+            listBoxLayers.DataSource = _images;
                 
         }
 
@@ -42,7 +44,7 @@ namespace ImageProcessing
         private void ImagesChangedHandler(object sender, EventArgs e)
         {
             //compose a new image
-            _compositeImage.compose(_images);
+            _compositeImage.compose(_images.ToList());
             //view the composed image
             viewImage(_compositeImage);
             
@@ -70,11 +72,6 @@ namespace ImageProcessing
             if (openFileDialogLoadImage.ShowDialog() == DialogResult.OK)
             {
                 _images.Add(new Image(openFileDialogLoadImage.FileName));
-                //connect the list item with the image
-                _listBoxItemImageDictionary.Add(_images[_images.Count - 1].ToString(), _images[_images.Count - 1]);
-                //add the new image to the layers
-                listBoxLayers.Items.Add(_images[_images.Count - 1].ToString());
-
                 OnImagesChange(EventArgs.Empty);
             }
         }
@@ -90,22 +87,85 @@ namespace ImageProcessing
 
         private void buttonZoomIn_Click(object sender, EventArgs e)
         {
-            foreach (var layer in listBoxLayers.SelectedItems)
+            
+            //loop on each selected layer
+            foreach (Image layer in listBoxLayers.SelectedItems)
             {
-                _listBoxItemImageDictionary[layer.ToString()].zoom(1.1);
+                //zoom with 110%
+                layer.zoom(1.1);
             }
-
+            //call the on image layers change event handler
             OnImagesChange(EventArgs.Empty);
         }
 
         private void buttonZoomOut_Click(object sender, EventArgs e)
         {
-            foreach (var layer in listBoxLayers.SelectedItems)
+            //loop on each selected layer
+            foreach (Image layer in listBoxLayers.SelectedItems)
             {
-                _listBoxItemImageDictionary[layer.ToString()].zoom(0.9);
+                //zoom with 90%
+                layer.zoom(0.9);
             }
-
+            //call the on image layers change event handler
             OnImagesChange(EventArgs.Empty);
+        }
+
+        private void buttonLayerUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedLayerIndex = listBoxLayers.SelectedIndex;
+                if (selectedLayerIndex > 0)
+                {
+                    Image tmp = (Image)listBoxLayers.SelectedItem;
+                    _images[selectedLayerIndex] = _images[selectedLayerIndex - 1];
+                    _images[selectedLayerIndex - 1] = tmp;
+                    listBoxLayers.ClearSelected();
+                    listBoxLayers.SelectedIndex = selectedLayerIndex - 1;
+                    OnImagesChange(EventArgs.Empty);
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            
+        }
+
+        private void buttonLayerDown_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedLayerIndex = listBoxLayers.SelectedIndex;
+                if (selectedLayerIndex < listBoxLayers.Items.Count - 1)
+                {
+                    Image tmp = (Image)listBoxLayers.SelectedItem;
+                    _images[selectedLayerIndex] = _images[selectedLayerIndex + 1];
+                    _images[selectedLayerIndex + 1] = tmp;
+                    listBoxLayers.ClearSelected();
+                    listBoxLayers.SelectedIndex = selectedLayerIndex + 1;
+                    OnImagesChange(EventArgs.Empty);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void buttonLayerDelete_Click(object sender, EventArgs e)
+        {
+            try 
+	        {
+                _images.RemoveAt(listBoxLayers.SelectedIndex);
+                OnImagesChange(EventArgs.Empty);
+	        }
+	        catch (Exception)
+	        {
+		
+		        
+	        }
+            
         }
     }
 }

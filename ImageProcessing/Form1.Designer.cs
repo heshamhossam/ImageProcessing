@@ -38,10 +38,10 @@
             this.groupBoxLayerOpertations = new System.Windows.Forms.GroupBox();
             this.buttonLayerDelete = new System.Windows.Forms.Button();
             this.buttonLayerDown = new System.Windows.Forms.Button();
+            this.listBoxLayers = new System.Windows.Forms.ListBox();
             this.buttonLayerUp = new System.Windows.Forms.Button();
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.openFileDialogLoadImage = new System.Windows.Forms.OpenFileDialog();
-            this.listBoxLayers = new System.Windows.Forms.ListBox();
             this.groupBoxImageOperations.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxLayerOpertations.SuspendLayout();
@@ -147,6 +147,7 @@
             this.buttonLayerDelete.TabIndex = 0;
             this.buttonLayerDelete.Text = "Delete";
             this.buttonLayerDelete.UseVisualStyleBackColor = true;
+            this.buttonLayerDelete.Click += new System.EventHandler(this.buttonLayerDelete_Click);
             // 
             // buttonLayerDown
             // 
@@ -156,6 +157,16 @@
             this.buttonLayerDown.TabIndex = 0;
             this.buttonLayerDown.Text = "Down";
             this.buttonLayerDown.UseVisualStyleBackColor = true;
+            this.buttonLayerDown.Click += new System.EventHandler(this.buttonLayerDown_Click);
+            // 
+            // listBoxLayers
+            // 
+            this.listBoxLayers.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.listBoxLayers.FormattingEnabled = true;
+            this.listBoxLayers.Location = new System.Drawing.Point(7, 41);
+            this.listBoxLayers.Name = "listBoxLayers";
+            this.listBoxLayers.Size = new System.Drawing.Size(171, 368);
+            this.listBoxLayers.TabIndex = 2;
             // 
             // buttonLayerUp
             // 
@@ -165,6 +176,7 @@
             this.buttonLayerUp.TabIndex = 0;
             this.buttonLayerUp.Text = "Up";
             this.buttonLayerUp.UseVisualStyleBackColor = true;
+            this.buttonLayerUp.Click += new System.EventHandler(this.buttonLayerUp_Click);
             // 
             // pictureBoxImage
             // 
@@ -180,15 +192,6 @@
             // openFileDialogLoadImage
             // 
             this.openFileDialogLoadImage.FileName = "openFileDialog";
-            // 
-            // listBoxLayers
-            // 
-            this.listBoxLayers.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.listBoxLayers.FormattingEnabled = true;
-            this.listBoxLayers.Location = new System.Drawing.Point(7, 41);
-            this.listBoxLayers.Name = "listBoxLayers";
-            this.listBoxLayers.Size = new System.Drawing.Size(171, 368);
-            this.listBoxLayers.TabIndex = 2;
             // 
             // Form1
             // 
