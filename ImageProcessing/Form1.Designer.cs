@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBoxImageOperations = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonRotate = new System.Windows.Forms.Button();
+            this.numericUpDownAngle = new System.Windows.Forms.NumericUpDown();
             this.buttonFlipLeft = new System.Windows.Forms.Button();
             this.buttonFlipRight = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -45,19 +48,23 @@
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.openFileDialogLoadImage = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogSaveImage = new System.Windows.Forms.SaveFileDialog();
-            this.numericUpDownAngle = new System.Windows.Forms.NumericUpDown();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonRotate = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelFirstCorner = new System.Windows.Forms.Label();
+            this.labelSecondCorner = new System.Windows.Forms.Label();
             this.groupBoxImageOperations.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAngle)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxLayerOpertations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAngle)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxImageOperations
             // 
+            this.groupBoxImageOperations.Controls.Add(this.groupBox2);
             this.groupBoxImageOperations.Controls.Add(this.groupBox1);
             this.groupBoxImageOperations.Controls.Add(this.buttonFlipLeft);
             this.groupBoxImageOperations.Controls.Add(this.buttonFlipRight);
@@ -72,6 +79,34 @@
             this.groupBoxImageOperations.TabIndex = 0;
             this.groupBoxImageOperations.TabStop = false;
             this.groupBoxImageOperations.Text = "Operations";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.buttonRotate);
+            this.groupBox1.Controls.Add(this.numericUpDownAngle);
+            this.groupBox1.Location = new System.Drawing.Point(6, 231);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(128, 76);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Rotate";
+            // 
+            // buttonRotate
+            // 
+            this.buttonRotate.Location = new System.Drawing.Point(6, 45);
+            this.buttonRotate.Name = "buttonRotate";
+            this.buttonRotate.Size = new System.Drawing.Size(120, 23);
+            this.buttonRotate.TabIndex = 2;
+            this.buttonRotate.Text = "Rotate";
+            this.buttonRotate.UseVisualStyleBackColor = true;
+            this.buttonRotate.Click += new System.EventHandler(this.buttonRotate_Click);
+            // 
+            // numericUpDownAngle
+            // 
+            this.numericUpDownAngle.Location = new System.Drawing.Point(6, 19);
+            this.numericUpDownAngle.Name = "numericUpDownAngle";
+            this.numericUpDownAngle.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownAngle.TabIndex = 1;
             // 
             // buttonFlipLeft
             // 
@@ -229,33 +264,54 @@
             // 
             this.openFileDialogLoadImage.FileName = "openFileDialog";
             // 
-            // numericUpDownAngle
+            // groupBox2
             // 
-            this.numericUpDownAngle.Location = new System.Drawing.Point(6, 19);
-            this.numericUpDownAngle.Name = "numericUpDownAngle";
-            this.numericUpDownAngle.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownAngle.TabIndex = 1;
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.labelSecondCorner);
+            this.groupBox2.Controls.Add(this.labelFirstCorner);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Location = new System.Drawing.Point(8, 313);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(126, 94);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Crop";
             // 
-            // groupBox1
+            // label1
             // 
-            this.groupBox1.Controls.Add(this.buttonRotate);
-            this.groupBox1.Controls.Add(this.numericUpDownAngle);
-            this.groupBox1.Location = new System.Drawing.Point(6, 231);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(128, 76);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Rotate";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Corner :";
             // 
-            // buttonRotate
+            // label2
             // 
-            this.buttonRotate.Location = new System.Drawing.Point(6, 45);
-            this.buttonRotate.Name = "buttonRotate";
-            this.buttonRotate.Size = new System.Drawing.Size(120, 23);
-            this.buttonRotate.TabIndex = 2;
-            this.buttonRotate.Text = "Rotate";
-            this.buttonRotate.UseVisualStyleBackColor = true;
-            this.buttonRotate.Click += new System.EventHandler(this.buttonRotate_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Corner :";
+            // 
+            // labelFirstCorner
+            // 
+            this.labelFirstCorner.AutoSize = true;
+            this.labelFirstCorner.Location = new System.Drawing.Point(7, 33);
+            this.labelFirstCorner.Name = "labelFirstCorner";
+            this.labelFirstCorner.Size = new System.Drawing.Size(13, 13);
+            this.labelFirstCorner.TabIndex = 0;
+            this.labelFirstCorner.Text = "0";
+            // 
+            // labelSecondCorner
+            // 
+            this.labelSecondCorner.AutoSize = true;
+            this.labelSecondCorner.Location = new System.Drawing.Point(7, 71);
+            this.labelSecondCorner.Name = "labelSecondCorner";
+            this.labelSecondCorner.Size = new System.Drawing.Size(13, 13);
+            this.labelSecondCorner.TabIndex = 0;
+            this.labelSecondCorner.Text = "0";
             // 
             // Form1
             // 
@@ -266,11 +322,13 @@
             this.Name = "Form1";
             this.Text = "MultiMedia";
             this.groupBoxImageOperations.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAngle)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBoxLayerOpertations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAngle)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -297,6 +355,11 @@
         private System.Windows.Forms.NumericUpDown numericUpDownAngle;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonRotate;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelSecondCorner;
+        private System.Windows.Forms.Label labelFirstCorner;
+        private System.Windows.Forms.Label label1;
     }
 }
 

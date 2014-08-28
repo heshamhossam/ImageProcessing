@@ -232,50 +232,47 @@ namespace ImageProcessing
             return Path;
         }
 
-        public void crop(Point _firstCorner, Point _secondCorner)
+        public void crop(Point firstCorner, Point secondCorner)
         {
-
             Rectangle croppedRectangle = new Rectangle();
-            if (_firstCorner.X < _secondCorner.X)
+            if (firstCorner.X < secondCorner.X)
             {
-                croppedRectangle.X = _firstCorner.X;
-                croppedRectangle.Width = _secondCorner.X - _firstCorner.X;
+                croppedRectangle.X = firstCorner.X;
+                croppedRectangle.Width = secondCorner.X - firstCorner.X;
             }
             else
             {
-                croppedRectangle.X = _secondCorner.X;
-                croppedRectangle.Width = _firstCorner.X - _secondCorner.X;
+                croppedRectangle.X = secondCorner.X;
+                croppedRectangle.Width = firstCorner.X - secondCorner.X;
             }
 
-            if (_firstCorner.Y > _secondCorner.Y)
+            if (firstCorner.Y > secondCorner.Y)
             {
-                croppedRectangle.Y = _secondCorner.Y;
-                croppedRectangle.Height = _firstCorner.Y - _secondCorner.Y;
+                croppedRectangle.Y = secondCorner.Y;
+                croppedRectangle.Height = firstCorner.Y - secondCorner.Y;
             }
             else
             {
-                croppedRectangle.Y = _firstCorner.Y;
-                croppedRectangle.Height = _secondCorner.Y - _firstCorner.Y;
+                croppedRectangle.Y = firstCorner.Y;
+                croppedRectangle.Height = secondCorner.Y - firstCorner.Y;
             }
 
 
 
-            var imageMatrix = getImageMatrix((Bitmap));
+            Color[,] croppedMatrix = new Color[croppedRectangle.Width, croppedRectangle.Height];
 
             for (int row = croppedRectangle.X, i = 0; i < croppedRectangle.Width; row++, i++)
             {
                 for (int col = croppedRectangle.Y, j = 0; j < croppedRectangle.Height; col++, j++)
                 {
-                    _matrix[i, j] = imageMatrix[row, col];
-
-
+                    croppedMatrix[i, j] = _matrix[row, col];
 
                 }
 
-
-
             }
-            
+
+
+            _matrix = croppedMatrix;
         }
 
         internal void save(string p)

@@ -177,11 +177,13 @@ namespace ImageProcessing
 
         private void pictureBoxImage_MouseDown(object sender, MouseEventArgs e)
         {
+            labelFirstCorner.Text = String.Format("X = {0}, Y = {1}", e.X, e.Y);
             _firstCorner = new Point(e.X, e.Y);
         }
 
         private void pictureBoxImage_MouseUp(object sender, MouseEventArgs e)
         {
+            labelSecondCorner.Text = String.Format("X = {0}, Y = {1}", e.X, e.Y);
             _secondCorner = new Point(e.X, e.Y);
         }
 
