@@ -182,14 +182,8 @@ namespace ImageProcessing
 
         private void buttonCrop_Click(object sender, EventArgs e)
         {
-            //loop on each selected layer
-            foreach (Image layer in listBoxLayers.SelectedItems)
-            {
-                //crop image layer
-                layer.crop(_firstCorner, _secondCorner);
-            }
-            //call the on image layers change event handler
-            OnImagesChange(EventArgs.Empty);
+            _compositeImage.crop(_firstCorner, _secondCorner);
+            viewImage(_compositeImage);
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -199,6 +193,39 @@ namespace ImageProcessing
                 _compositeImage.save(saveFileDialogSaveImage.FileName);
             }
             
+        }
+
+        private void buttonFlipRight_Click(object sender, EventArgs e)
+        {
+            //loop on each selected layer
+            foreach (Image layer in listBoxLayers.SelectedItems)
+            {
+                layer.rotate(90.0);
+            }
+            //call the on image layers change event handler
+            OnImagesChange(EventArgs.Empty);
+        }
+
+        private void buttonFlipLeft_Click(object sender, EventArgs e)
+        {
+            //loop on each selected layer
+            foreach (Image layer in listBoxLayers.SelectedItems)
+            {
+                layer.rotate(-90.0);
+            }
+            //call the on image layers change event handler
+            OnImagesChange(EventArgs.Empty);
+        }
+
+        private void buttonRotate_Click(object sender, EventArgs e)
+        {
+            //loop on each selected layer
+            foreach (Image layer in listBoxLayers.SelectedItems)
+            {
+                layer.rotate((double)numericUpDownAngle.Value);
+            }
+            //call the on image layers change event handler
+            OnImagesChange(EventArgs.Empty);
         }
     }
 }

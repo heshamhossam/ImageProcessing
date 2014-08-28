@@ -89,6 +89,8 @@ namespace ImageProcessing
                     {
                         case Interpolation.NEAREST_NEIGHBOR:
                             scaledImageMatrix[x, y] = _matrix[sourceCoordXFloored, sourceCoordYFloored];
+                            if (sourceCoordXFloored < _matrix.GetLength(0) - 1 && sourceCoordYFloored < _matrix.GetLength(1) - 1)
+                                scaledImageMatrix[x, y] = _matrix[sourceCoordXFloored + 1, sourceCoordYFloored + 1];
                             break;
 
                         case Interpolation.BILINEAR:
@@ -238,6 +240,54 @@ namespace ImageProcessing
         internal void save(string p)
         {
             throw new NotImplementedException();
+        }
+
+        public void rotate(double angle)
+        {
+            angle = Math.PI * angle / 180.0;
+            double cosAngle = Math.Cos(-angle);
+            double sinAngle = Math.Sin(-angle);
+            double rotatedSourceX, rotatedSourceY;
+            int translatedX, translatedY;
+           
+
+            Color[,] rotatedMatrix = new Color[_matrix.GetLength(0), _matrix.GetLength(1)];
+
+            
+
+            for (int x = 0; x < rotatedMatrix.GetLength(0); x++)
+            {
+                for (int y = 0; y < rotatedMatrix.GetLength(1); y++)
+                {
+
+                    translatedX = x - rotatedMatrix.GetLength(0) / 2;
+                    translatedY = y - rotatedMatrix.GetLength(1) / 2;
+
+                    rotatedSourceX = translatedX * cosAngle - translatedY * sinAngle;
+
+
+                    rotatedSourceY = translatedX * sinAngle + translatedY * cosAngle;
+
+
+                    rotatedSourceX += rotatedMatrix.GetLength(0) / 2;
+                    rotatedSourceY += rotatedMatrix.GetLength(1) / 2;
+
+                    if (rotatedSourceX > 0 && rotatedSourceX < _matrix.GetLength(0))
+                    {
+                        if (rotatedSourceY > 0 && rotatedSourceY < _matrix.GetLength(1))
+                        {
+                            rotatedMatrix[x, y] = _matrix[(int)Math.Floor(rotatedSourceX), (int)Math.Floor(rotatedSourceY)];
+                            if (rotatedSourceX < _matrix.GetLength(0) - 1 && rotatedSourceY < _matrix.GetLength(1) - 1)
+                                rotatedMatrix[x, y] = _matrix[(int)Math.Ceiling(rotatedSourceX), (int)Math.Ceiling(rotatedSourceY)];
+                        }
+                    }
+
+
+                }
+            }
+
+            _matrix = rotatedMatrix;
+
         }
     }
 }

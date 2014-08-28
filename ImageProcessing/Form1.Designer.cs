@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBoxImageOperations = new System.Windows.Forms.GroupBox();
+            this.buttonFlipLeft = new System.Windows.Forms.Button();
+            this.buttonFlipRight = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.buttonZoomOut = new System.Windows.Forms.Button();
             this.buttonZoomIn = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
@@ -41,33 +44,70 @@
             this.buttonLayerUp = new System.Windows.Forms.Button();
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.openFileDialogLoadImage = new System.Windows.Forms.OpenFileDialog();
-            this.buttonSave = new System.Windows.Forms.Button();
             this.saveFileDialogSaveImage = new System.Windows.Forms.SaveFileDialog();
+            this.numericUpDownAngle = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonRotate = new System.Windows.Forms.Button();
             this.groupBoxImageOperations.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxLayerOpertations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAngle)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxImageOperations
             // 
+            this.groupBoxImageOperations.Controls.Add(this.groupBox1);
+            this.groupBoxImageOperations.Controls.Add(this.buttonFlipLeft);
+            this.groupBoxImageOperations.Controls.Add(this.buttonFlipRight);
             this.groupBoxImageOperations.Controls.Add(this.buttonSave);
             this.groupBoxImageOperations.Controls.Add(this.buttonZoomOut);
             this.groupBoxImageOperations.Controls.Add(this.buttonZoomIn);
             this.groupBoxImageOperations.Controls.Add(this.buttonLoad);
             this.groupBoxImageOperations.Controls.Add(this.buttonCrop);
-            this.groupBoxImageOperations.Location = new System.Drawing.Point(567, 3);
+            this.groupBoxImageOperations.Location = new System.Drawing.Point(664, 3);
             this.groupBoxImageOperations.Name = "groupBoxImageOperations";
-            this.groupBoxImageOperations.Size = new System.Drawing.Size(79, 411);
+            this.groupBoxImageOperations.Size = new System.Drawing.Size(144, 413);
             this.groupBoxImageOperations.TabIndex = 0;
             this.groupBoxImageOperations.TabStop = false;
             this.groupBoxImageOperations.Text = "Operations";
             // 
+            // buttonFlipLeft
+            // 
+            this.buttonFlipLeft.Location = new System.Drawing.Point(15, 161);
+            this.buttonFlipLeft.Name = "buttonFlipLeft";
+            this.buttonFlipLeft.Size = new System.Drawing.Size(119, 23);
+            this.buttonFlipLeft.TabIndex = 0;
+            this.buttonFlipLeft.Text = "Flip Left";
+            this.buttonFlipLeft.UseVisualStyleBackColor = true;
+            this.buttonFlipLeft.Click += new System.EventHandler(this.buttonFlipLeft_Click);
+            // 
+            // buttonFlipRight
+            // 
+            this.buttonFlipRight.Location = new System.Drawing.Point(15, 132);
+            this.buttonFlipRight.Name = "buttonFlipRight";
+            this.buttonFlipRight.Size = new System.Drawing.Size(119, 23);
+            this.buttonFlipRight.TabIndex = 0;
+            this.buttonFlipRight.Text = "Flip Right";
+            this.buttonFlipRight.UseVisualStyleBackColor = true;
+            this.buttonFlipRight.Click += new System.EventHandler(this.buttonFlipRight_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(15, 190);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(119, 23);
+            this.buttonSave.TabIndex = 0;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
             // buttonZoomOut
             // 
-            this.buttonZoomOut.Location = new System.Drawing.Point(6, 106);
+            this.buttonZoomOut.Location = new System.Drawing.Point(15, 103);
             this.buttonZoomOut.Name = "buttonZoomOut";
-            this.buttonZoomOut.Size = new System.Drawing.Size(62, 23);
+            this.buttonZoomOut.Size = new System.Drawing.Size(119, 23);
             this.buttonZoomOut.TabIndex = 0;
             this.buttonZoomOut.Text = "-";
             this.buttonZoomOut.UseVisualStyleBackColor = true;
@@ -75,9 +115,9 @@
             // 
             // buttonZoomIn
             // 
-            this.buttonZoomIn.Location = new System.Drawing.Point(6, 77);
+            this.buttonZoomIn.Location = new System.Drawing.Point(15, 74);
             this.buttonZoomIn.Name = "buttonZoomIn";
-            this.buttonZoomIn.Size = new System.Drawing.Size(62, 23);
+            this.buttonZoomIn.Size = new System.Drawing.Size(119, 23);
             this.buttonZoomIn.TabIndex = 0;
             this.buttonZoomIn.Text = "+";
             this.buttonZoomIn.UseVisualStyleBackColor = true;
@@ -85,9 +125,9 @@
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(6, 19);
+            this.buttonLoad.Location = new System.Drawing.Point(15, 16);
             this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(62, 23);
+            this.buttonLoad.Size = new System.Drawing.Size(119, 23);
             this.buttonLoad.TabIndex = 0;
             this.buttonLoad.Text = "Load";
             this.buttonLoad.UseVisualStyleBackColor = true;
@@ -95,9 +135,9 @@
             // 
             // buttonCrop
             // 
-            this.buttonCrop.Location = new System.Drawing.Point(6, 48);
+            this.buttonCrop.Location = new System.Drawing.Point(15, 45);
             this.buttonCrop.Name = "buttonCrop";
-            this.buttonCrop.Size = new System.Drawing.Size(62, 23);
+            this.buttonCrop.Size = new System.Drawing.Size(119, 23);
             this.buttonCrop.TabIndex = 0;
             this.buttonCrop.Text = "Crop";
             this.buttonCrop.UseVisualStyleBackColor = true;
@@ -108,7 +148,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.69027F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.30974F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 149F));
             this.tableLayoutPanel1.Controls.Add(this.groupBoxLayerOpertations, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxImageOperations, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBoxImage, 1, 0);
@@ -116,7 +156,8 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(650, 417);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(811, 424);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // groupBoxLayerOpertations
@@ -176,9 +217,9 @@
             this.pictureBoxImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxImage.Location = new System.Drawing.Point(199, 3);
+            this.pictureBoxImage.Location = new System.Drawing.Point(232, 3);
             this.pictureBoxImage.Name = "pictureBoxImage";
-            this.pictureBoxImage.Size = new System.Drawing.Size(362, 411);
+            this.pictureBoxImage.Size = new System.Drawing.Size(426, 418);
             this.pictureBoxImage.TabIndex = 1;
             this.pictureBoxImage.TabStop = false;
             this.pictureBoxImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxImage_MouseDown);
@@ -188,21 +229,39 @@
             // 
             this.openFileDialogLoadImage.FileName = "openFileDialog";
             // 
-            // buttonSave
+            // numericUpDownAngle
             // 
-            this.buttonSave.Location = new System.Drawing.Point(6, 135);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(62, 23);
-            this.buttonSave.TabIndex = 0;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.numericUpDownAngle.Location = new System.Drawing.Point(6, 19);
+            this.numericUpDownAngle.Name = "numericUpDownAngle";
+            this.numericUpDownAngle.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownAngle.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.buttonRotate);
+            this.groupBox1.Controls.Add(this.numericUpDownAngle);
+            this.groupBox1.Location = new System.Drawing.Point(6, 231);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(128, 76);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Rotate";
+            // 
+            // buttonRotate
+            // 
+            this.buttonRotate.Location = new System.Drawing.Point(6, 45);
+            this.buttonRotate.Name = "buttonRotate";
+            this.buttonRotate.Size = new System.Drawing.Size(120, 23);
+            this.buttonRotate.TabIndex = 2;
+            this.buttonRotate.Text = "Rotate";
+            this.buttonRotate.UseVisualStyleBackColor = true;
+            this.buttonRotate.Click += new System.EventHandler(this.buttonRotate_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 441);
+            this.ClientSize = new System.Drawing.Size(828, 448);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "MultiMedia";
@@ -210,6 +269,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBoxLayerOpertations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAngle)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -231,6 +292,11 @@
         private System.Windows.Forms.ListBox listBoxLayers;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.SaveFileDialog saveFileDialogSaveImage;
+        private System.Windows.Forms.Button buttonFlipLeft;
+        private System.Windows.Forms.Button buttonFlipRight;
+        private System.Windows.Forms.NumericUpDown numericUpDownAngle;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonRotate;
     }
 }
 
