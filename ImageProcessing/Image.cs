@@ -239,7 +239,7 @@ namespace ImageProcessing
 
         internal void save(string p)
         {
-            throw new NotImplementedException();
+            this.Bitmap.Save(p,System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
         public void rotate(double angle)
