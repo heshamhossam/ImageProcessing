@@ -21,6 +21,7 @@ namespace ImageProcessing
         //corner points of cropping
         private Point _firstCorner, _secondCorner;   
         
+        
 
 
         public Form1()
@@ -35,6 +36,10 @@ namespace ImageProcessing
             listBoxLayers.SelectionMode = SelectionMode.MultiExtended;
             //bind the images to the list box
             listBoxLayers.DataSource = _images;
+            //save file dialog default extensions
+            saveFileDialogSaveImage.Title = "Save Image";
+            saveFileDialogSaveImage.DefaultExt = "jpeg";
+            saveFileDialogSaveImage.Filter = "Image files (*.jpeg)|*.jpeg";
                 
         }
 

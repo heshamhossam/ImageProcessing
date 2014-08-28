@@ -232,14 +232,14 @@ namespace ImageProcessing
             return Path;
         }
 
-        internal void crop(Point _firstCorner, Point _secondCorner)
+        public void crop(Point firstCorner, Point secondCorner)
         {
-            throw new NotImplementedException();
+            
         }
 
         internal void save(string p)
         {
-            this.Bitmap.Save(p,System.Drawing.Imaging.ImageFormat.Jpeg);
+            this.Bitmap.Save(p, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
         public void rotate(double angle)
