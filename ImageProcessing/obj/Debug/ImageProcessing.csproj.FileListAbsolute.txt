@@ -16,3 +16,12 @@ C:\Users\eslam\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageP
 C:\Users\eslam\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageProcessing.Form1.resources
 C:\Users\eslam\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageProcessing.Properties.Resources.resources
 C:\Users\eslam\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageProcessing.csproj.GenerateResource.Cache
+C:\Users\Hawex\Documents\GitHub\ImageProcessing\ImageProcessing\bin\Debug\ImageProcessing.exe.config
+C:\Users\Hawex\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageProcessing.exe
+C:\Users\Hawex\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageProcessing.pdb
+C:\Users\Hawex\Documents\GitHub\ImageProcessing\ImageProcessing\bin\Debug\ImageProcessing.exe
+C:\Users\Hawex\Documents\GitHub\ImageProcessing\ImageProcessing\bin\Debug\ImageProcessing.pdb
+C:\Users\Hawex\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageProcessing.csprojResolveAssemblyReference.cache
+C:\Users\Hawex\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageProcessing.Form1.resources
+C:\Users\Hawex\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageProcessing.Properties.Resources.resources
+C:\Users\Hawex\Documents\GitHub\ImageProcessing\ImageProcessing\obj\Debug\ImageProcessing.csproj.GenerateResource.Cache

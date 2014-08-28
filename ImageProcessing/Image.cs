@@ -232,8 +232,49 @@ namespace ImageProcessing
             return Path;
         }
 
-        public void crop(Point firstCorner, Point secondCorner)
+        public void crop(Point _firstCorner, Point _secondCorner)
         {
+
+            Rectangle croppedRectangle = new Rectangle();
+            if (_firstCorner.X < _secondCorner.X)
+            {
+                croppedRectangle.X = _firstCorner.X;
+                croppedRectangle.Width = _secondCorner.X - _firstCorner.X;
+            }
+            else
+            {
+                croppedRectangle.X = _secondCorner.X;
+                croppedRectangle.Width = _firstCorner.X - _secondCorner.X;
+            }
+
+            if (_firstCorner.Y > _secondCorner.Y)
+            {
+                croppedRectangle.Y = _secondCorner.Y;
+                croppedRectangle.Height = _firstCorner.Y - _secondCorner.Y;
+            }
+            else
+            {
+                croppedRectangle.Y = _firstCorner.Y;
+                croppedRectangle.Height = _secondCorner.Y - _firstCorner.Y;
+            }
+
+
+
+            var imageMatrix = getImageMatrix((Bitmap));
+
+            for (int row = croppedRectangle.X, i = 0; i < croppedRectangle.Width; row++, i++)
+            {
+                for (int col = croppedRectangle.Y, j = 0; j < croppedRectangle.Height; col++, j++)
+                {
+                    _matrix[i, j] = imageMatrix[row, col];
+
+
+
+                }
+
+
+
+            }
             
         }
 
